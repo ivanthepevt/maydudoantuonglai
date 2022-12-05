@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Máy đoán tương lai</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+
+<div style="align-items: center;">
+  <button id="myBtn" style="margin: auto; font-size: larger; padding: 1rem;">Máy dự đoán tương lai</button>
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Máy đoán tương lai siêu chính xác</h3>
+    <h5>Máy sẽ áp dụng một thuật toán dựa vào số tuổi của bạn để tính ra năm sinh, đối chiếu với các yếu tố như tử vi, chòm sao, hoàng đạo và các dữ liệu đã thu thập được trong lịch sử để đưa ra dự đoán chính xác nhất về tương lai của bạn.</h5>
+    <hr>
+    <div id = "pmdoantuonglai">
+    <form id = "formdoantuonglai" action="javascript:doantuonglai();">
+        <label for="age">Nhập số tuổi của bạn ở đây(lớn hơn 0 và nhỏ hơn 70):</label><br>
+        <input type="text" id="age" name="age"><br><br>
+        <label for="year">Bạn muốn dự đoán tương lai bao nhiêu năm sau?(tối đa 10 năm)</label><br>
+        <input type="year" id="year" name="year"><br><br>
+        <input type="submit" value="Bắt đầu đoán tương lai">
+      </form> 
+    </div>
+      <hr> 
+      <h6 style="color: red">Lưu ý: Thuật toán đang trong quá trình nghiên cứu nên chỉ dự đoán được chính xác trong vòng 10 năm, cho độ tuổi từ 0 đến 70 tuổi.</h6>
+    
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function showhidediv(myDIV) {
+  var x = document.getElementById(myDIV);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function doantuonglai(){
+    var yearvalue = document.getElementById("year").value;
+    var agevalue = document.getElementById("age").value;
+    var form = document.getElementById("pmdoantuonglai");
+    console.log(form);
+    form.innerHTML = "<div class='loader'></div> <p>Đang tính toán, vui lòng đợi...</p>";
+
+    console.log(agevalue);
+    var result = "</br><h3>Dự đoán tương lai của bạn " + yearvalue + " năm sau:</h3> </br>" + "Trong " + yearvalue + " năm tới, bạn sẽ trở thành một người " + (parseInt(yearvalue) + parseInt(agevalue)) + " tuổi.</br></br>";
+
+    setTimeout(function() {
+    //code to be executed after 3 second
+    form.innerHTML = result;
+  
+}, 2000);
+
+}
+
+</script>
+
+</body>
+</html>
